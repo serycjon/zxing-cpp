@@ -8,6 +8,8 @@ cmake_minimum_required(VERSION 2.8.0)
 # export compile commands for rtags
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
+set(MODULES_DIR "${PROJECT_SOURCE_DIR}")
+
 set(CMAKE_LIBRARY_PATH /opt/local/lib ${CMAKE_LIBRARY_PATH})
 
 # Check for polluted source tree.
@@ -55,7 +57,7 @@ if(WIN32)
 endif()
 
 # OpenCV classes
-find_package(OpenCV)
+# find_package(OpenCV)
 if(OpenCV_FOUND)
     file(GLOB_RECURSE LIBZXING_OPENCV_FILES
         "./opencv/src/*.cpp"
@@ -93,6 +95,14 @@ file(GLOB_RECURSE ZXING_FILES
     "./cli/src/*.cpp"
     "./cli/src/*.h"
 )
+
+if(ANDROID)
+  set(LIBRARY_OUTPUT_PATH         "${CMAKE_BINARY_DIR}/lib/${ANDROID_NDK_ABI_NAME}")
+  set(EXECUTABLE_OUTPUT_PATH      "${CMAKE_BINARY_DIR}/bin") 
+
+  include(cmake/OpenCVDetectAndroidSDK.cmake REQUIRED)
+  include(cmake/ZxingCppGenAndroidMK.cmake REQUIRED)
+endif(ANDROID)
 
 add_executable(zxing ${ZXING_FILES})
 target_link_libraries(zxing libzxing)

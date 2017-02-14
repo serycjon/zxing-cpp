@@ -1,4 +1,4 @@
 include_directories(@CMAKE_SOURCE_DIR@/core/src) 
 include(@CMAKE_BINARY_DIR@/ZXingLibraryDepends.cmake)
 
-set(ZXing_LIBS @CMAKE_BINARY_DIR@/libzxing.a)
+set(ZXing_LIBS libzxing)
