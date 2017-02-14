@@ -5,6 +5,9 @@
 project(zxing)
 cmake_minimum_required(VERSION 2.8.0)
 
+# export compile commands for rtags
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+
 set(CMAKE_LIBRARY_PATH /opt/local/lib ${CMAKE_LIBRARY_PATH})
 
 # Check for polluted source tree.
@@ -112,3 +115,10 @@ if(CPPUNIT_FOUND)
 else()
     message(WARNING "Not building testrunner, because CppUnit is missing")
 endif()
+
+# ---------------------------------------------------------------------------
+# Export ZXingConfig.cmake for using in other projects 
+# ---------------------------------------------------------------------------
+export(TARGETS libzxing FILE "${PROJECT_BINARY_DIR}/ZXingLibraryDepends.cmake")
+configure_file(ZXingConfig.cmake.in
+  "${PROJECT_BINARY_DIR}/ZXingConfig.cmake" @ONLY)
