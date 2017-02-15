@@ -148,7 +148,7 @@ Ref<Result> OneDReader::doDecode(Ref<BinaryBitmap> image, DecodeHints hints) {
       }
     }
   }
-  throw NotFoundException();
+  throw NotFoundException("ya11b");
 }
 
 float OneDReader::patternMatchVariance(vector<int>& counters,
@@ -198,7 +198,7 @@ void OneDReader::recordPattern(Ref<BitArray> row,
   }
   int end = row->getSize();
   if (start >= end) {
-    throw NotFoundException();
+    throw NotFoundException("b1u4x");
   }
   bool isWhite = !row->get(start);
   int counterPosition = 0;
@@ -220,7 +220,7 @@ void OneDReader::recordPattern(Ref<BitArray> row,
   // If we read fully the last section of pixels and filled up our counters -- or filled
   // the last counter but ran off the side of the image, OK. Otherwise, a problem.
   if (!(counterPosition == numCounters || (counterPosition == numCounters - 1 && i == end))) {
-    throw NotFoundException();
+    throw NotFoundException("spnfh");
   }
 }
 

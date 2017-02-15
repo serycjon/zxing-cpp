@@ -106,7 +106,7 @@ void DecodedBitStreamParser::decodeHanziSegment(Ref<BitSource> bits_,
   BitSource& bits (*bits_);
   // Don't crash trying to read more bits than we have available.
   if (count * 13 > bits.available()) {
-    throw FormatException();
+    throw FormatException("b9v21");
   }
 
   // Each character will require 2 bytes. Read the characters as 2-byte pairs
@@ -136,7 +136,7 @@ void DecodedBitStreamParser::decodeHanziSegment(Ref<BitSource> bits_,
   } catch (ReaderException const& ignored) {
     (void)ignored;
     delete [] buffer;
-    throw FormatException();
+    throw FormatException("qhr39");
   }
 
   delete [] buffer;
@@ -170,7 +170,7 @@ void DecodedBitStreamParser::decodeKanjiSegment(Ref<BitSource> bits, std::string
   } catch (ReaderException const& ignored) {
     (void)ignored;
     delete [] buffer;
-    throw FormatException();
+    throw FormatException("8gxzo");
   }
   delete[] buffer;
 }
@@ -185,7 +185,7 @@ void DecodedBitStreamParser::decodeByteSegment(Ref<BitSource> bits_,
   BitSource& bits (*bits_);
   // Don't crash trying to read more bits than we have available.
   if (count << 3 > bits.available()) {
-    throw FormatException();
+    throw FormatException("uz1qn");
   }
 
   ArrayRef<char> bytes_ (count);
@@ -208,7 +208,7 @@ void DecodedBitStreamParser::decodeByteSegment(Ref<BitSource> bits_,
     append(result, readBytes, nBytes, encoding.c_str());
   } catch (ReaderException const& ignored) {
     (void)ignored;
-    throw FormatException();
+    throw FormatException("dp7mc");
   }
   byteSegments->values().push_back(bytes_);
 }
@@ -272,7 +272,7 @@ void DecodedBitStreamParser::decodeNumericSegment(Ref<BitSource> bits, std::stri
 
 char DecodedBitStreamParser::toAlphaNumericChar(size_t value) {
   if (value >= sizeof(DecodedBitStreamParser::ALPHANUMERIC_CHARS)) {
-    throw FormatException();
+    throw FormatException("e0rbj");
   }
   return ALPHANUMERIC_CHARS[value];
 }
@@ -286,7 +286,7 @@ void DecodedBitStreamParser::decodeAlphanumericSegment(Ref<BitSource> bits_,
   // Read two characters at a time
   while (count > 1) {
     if (bits.available() < 11) {
-      throw FormatException();
+      throw FormatException("mn7d0");
     }
     int nextTwoCharsBits = bits.readBits(11);
     bytes << toAlphaNumericChar(nextTwoCharsBits / 45);
@@ -296,7 +296,7 @@ void DecodedBitStreamParser::decodeAlphanumericSegment(Ref<BitSource> bits_,
   if (count == 1) {
     // special case: one character left
     if (bits.available() < 6) {
-      throw FormatException();
+      throw FormatException("wxg7b");
     }
     bytes << toAlphaNumericChar(bits.readBits(6));
   }
@@ -340,7 +340,7 @@ namespace {
       int secondThirdBytes = bits.readBits(16);
       return ((firstByte & 0x1F) << 16) | secondThirdBytes;
     }
-    throw FormatException();
+    throw FormatException("sms4j");
   }
 }
 
@@ -377,7 +377,7 @@ DecodedBitStreamParser::decode(ArrayRef<char> bytes,
           fc1InEffect = true;
         } else if (mode == &Mode::STRUCTURED_APPEND) {
           if (bits.available() < 16) {
-            throw FormatException();
+            throw FormatException("o6dgf");
           }
           // not really supported; all we do is ignore it
           // Read next 8 bits (symbol sequence #) and 8 bits (parity data), then continue
@@ -387,7 +387,7 @@ DecodedBitStreamParser::decode(ArrayRef<char> bytes,
           int value = parseECIValue(bits);
           currentCharacterSetECI = CharacterSetECI::getCharacterSetECIByValue(value);
           if (currentCharacterSetECI == 0) {
-            throw FormatException();
+            throw FormatException("ipzj8");
           }
         } else {
           // First handle Hanzi mode which does not start with character count
@@ -411,7 +411,7 @@ DecodedBitStreamParser::decode(ArrayRef<char> bytes,
             } else if (mode == &Mode::KANJI) {
               decodeKanjiSegment(bits_, result, count);
             } else {
-              throw FormatException();
+              throw FormatException("igcxr");
             }
           }
         }
@@ -420,7 +420,7 @@ DecodedBitStreamParser::decode(ArrayRef<char> bytes,
   } catch (IllegalArgumentException const& iae) {
     (void)iae;
     // from readBits() calls
-    throw FormatException();
+    throw FormatException("ef5r7");
   }
   
   return Ref<DecoderResult>(new DecoderResult(bytes, Ref<String>(new String(result)), byteSegments, (string)ecLevel));

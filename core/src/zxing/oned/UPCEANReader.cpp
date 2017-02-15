@@ -137,17 +137,17 @@ Ref<Result> UPCEANReader::decodeRow(int rowNumber,
   int end = endRange[1];
   int quietEnd = end + (end - endRange[0]);
   if (quietEnd >= row->getSize() || !row->isRange(end, quietEnd, false)) {
-    throw NotFoundException();
+    throw NotFoundException("kj3po");
   }
 
   // UPC/EAN should never be less than 8 chars anyway
   if (result.length() < 8) {
-    throw FormatException();
+    throw FormatException("5wlzg");
   }
 
   Ref<String> resultString (new String(result));
   if (!checkChecksum(resultString)) {
-    throw ChecksumException();
+    throw ChecksumException("na3uy");
   }
   
   float left = (float) (startGuardRange[1] + startGuardRange[0]) / 2.0f;
@@ -235,7 +235,7 @@ UPCEANReader::Range UPCEANReader::findGuardPattern(Ref<BitArray> row,
       isWhite = !isWhite;
     }
   }
-  throw NotFoundException();
+  throw NotFoundException("4h3ff");
 }
 
 UPCEANReader::Range UPCEANReader::decodeEnd(Ref<BitArray> row, int endStart) {
@@ -261,7 +261,7 @@ int UPCEANReader::decodeDigit(Ref<BitArray> row,
   if (bestMatch >= 0) {
     return bestMatch;
   } else {
-    throw NotFoundException();
+    throw NotFoundException("t5ioc");
   }
 }
 

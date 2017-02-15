@@ -92,5 +92,5 @@ Ref<Result> MultiFormatOneDReader::decodeRow(int rowNumber, Ref<BitArray> row) {
       // continue
     }
   }
-  throw NotFoundException();
+  throw NotFoundException("4gswr");
 }

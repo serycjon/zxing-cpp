@@ -133,7 +133,7 @@ Ref<DetectorResult> Detector::detect() {
   }
 
   if (maybeTopLeft == 0 || bottomLeft == 0 || maybeBottomRight == 0) {
-    throw NotFoundException();
+    throw NotFoundException("lu76x");
   }
 
   // Bottom left is correct but top left and bottom right might be switched

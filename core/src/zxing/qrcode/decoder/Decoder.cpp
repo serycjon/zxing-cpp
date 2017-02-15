@@ -53,7 +53,7 @@ void Decoder::correctErrors(ArrayRef<char> codewordBytes, int numDataCodewords) 
     rsDecoder_.decode(codewordInts, numECCodewords);
   } catch (ReedSolomonException const& ignored) {
     (void)ignored;
-    throw ChecksumException();
+    throw ChecksumException("f3jfk");
   }
 
   for (int i = 0; i < numDataCodewords; i++) {

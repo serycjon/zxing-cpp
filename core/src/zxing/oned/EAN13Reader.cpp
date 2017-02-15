@@ -77,7 +77,7 @@ void EAN13Reader::determineFirstDigit(std::string& resultString, int lgPatternFo
       return;
     }
   }
-  throw NotFoundException();
+  throw NotFoundException("g3s9e");
 }
 
 zxing::BarcodeFormat EAN13Reader::getBarcodeFormat(){

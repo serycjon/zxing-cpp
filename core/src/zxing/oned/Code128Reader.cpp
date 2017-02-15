@@ -224,7 +224,7 @@ vector<int> Code128Reader::findStartPattern(Ref<BitArray> row){
       isWhite = !isWhite;
     }
   }
-  throw NotFoundException();
+  throw NotFoundException("5rqnc");
 }
 
 int Code128Reader::decodeCode(Ref<BitArray> row, vector<int>& counters, int rowOffset) {
@@ -243,7 +243,7 @@ int Code128Reader::decodeCode(Ref<BitArray> row, vector<int>& counters, int rowO
   if (bestMatch >= 0) {
     return bestMatch;
   } else {
-    throw NotFoundException();
+    throw NotFoundException("2chwq");
   }
 }
 
@@ -264,7 +264,7 @@ Ref<Result> Code128Reader::decodeRow(int rowNumber, Ref<BitArray> row) {
       codeSet = CODE_CODE_C;
       break;
     default:
-      throw FormatException();
+      throw FormatException("z0s6t");
   }
 
   bool done = false;
@@ -320,7 +320,7 @@ Ref<Result> Code128Reader::decodeRow(int rowNumber, Ref<BitArray> row) {
       case CODE_START_A:
       case CODE_START_B:
       case CODE_START_C:
-        throw FormatException();
+        throw FormatException("gpz4q");
     }
 
     switch (codeSet) {
@@ -488,21 +488,21 @@ Ref<Result> Code128Reader::decodeRow(int rowNumber, Ref<BitArray> row) {
   if (!row->isRange(nextStart,
                     std::min(row->getSize(), nextStart + (nextStart - lastStart) / 2),
                     false)) {
-    throw NotFoundException();
+    throw NotFoundException("8d0d8");
   }
 
   // Pull out from sum the value of the penultimate check code
   checksumTotal -= multiplier * lastCode;
   // lastCode is the checksum then:
   if (checksumTotal % 103 != lastCode) {
-    throw ChecksumException();
+    throw ChecksumException("lxvk4");
   }
 
   // Need to pull out the check digits from string
   int resultLength = result.length();
   if (resultLength == 0) {
     // false positive
-    throw NotFoundException();
+    throw NotFoundException("9ruxx");
   }
 
   // Only bother if the result had at least one character, and if the checksum digit happened to

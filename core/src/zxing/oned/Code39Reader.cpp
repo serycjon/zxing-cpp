@@ -115,7 +115,7 @@ Ref<Result> Code39Reader::decodeRow(int rowNumber, Ref<BitArray> row) {
     recordPattern(row, nextStart, theCounters);
     int pattern = toNarrowWidePattern(theCounters);
     if (pattern < 0) {
-      throw NotFoundException();;
+      throw NotFoundException("z6fv0");;
     }
     decodedChar = patternToChar(pattern);
     result.append(1, decodedChar);
@@ -137,7 +137,7 @@ Ref<Result> Code39Reader::decodeRow(int rowNumber, Ref<BitArray> row) {
   // If 50% of last pattern size, following last pattern, is not whitespace,
   // fail (but if it's whitespace to the very end of the image, that's OK)
   if (nextStart != end && (whiteSpaceAfterEnd * 2) < lastPatternSize) {
-    throw NotFoundException();
+    throw NotFoundException("kgtbe");
   }
 
   if (usingCheckDigit) {
@@ -147,14 +147,14 @@ Ref<Result> Code39Reader::decodeRow(int rowNumber, Ref<BitArray> row) {
       total += checkdigit_string.find_first_of(decodeRowResult[i], 0);
     }
     if (result[max] != CHECK_DIGIT_STRING[total % 43]) {
-      throw ChecksumException();
+      throw ChecksumException("zyqwc");
     }
     result.resize(max);
   }
   
   if (result.length() == 0) {
     // Almost false positive
-    throw NotFoundException();
+    throw NotFoundException("oxslr");
   }
   
   Ref<String> resultString;
@@ -215,7 +215,7 @@ vector<int> Code39Reader::findAsteriskPattern(Ref<BitArray> row, vector<int>& co
       isWhite = !isWhite;
     }
   }
-  throw NotFoundException();
+  throw NotFoundException("yn43o");
 }
 
 // For efficiency, returns -1 on failure. Not throwing here saved as many as

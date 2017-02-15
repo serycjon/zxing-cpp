@@ -185,7 +185,7 @@ int GlobalHistogramBinarizer::estimateBlackPoint(ArrayRef<int> const& buckets) {
   // "<= 1/16 of the total histogram buckets apart"
   // std::cerr << "! " << secondPeak << " " << firstPeak << " " << numBuckets << std::endl;
   if (secondPeak - firstPeak <= numBuckets >> 4) {
-    throw NotFoundException();
+    throw NotFoundException("zz6ik");
   }
 
   // Find a valley between them that is low and closer to the white peak

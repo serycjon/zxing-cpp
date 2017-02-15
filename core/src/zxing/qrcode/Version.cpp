@@ -97,13 +97,13 @@ ECBlocks& Version::getECBlocksForLevel(ErrorCorrectionLevel &ecLevel) {
 
 Version *Version::getProvisionalVersionForDimension(int dimension) {
   if (dimension % 4 != 1) {
-    throw FormatException();
+    throw FormatException("lal6u");
   }
   try {
     return Version::getVersionForNumber((dimension - 17) >> 2);
   } catch (IllegalArgumentException const& ignored) {
     (void)ignored;
-    throw FormatException();
+    throw FormatException("tcars");
   }
 }
 

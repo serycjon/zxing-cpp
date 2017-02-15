@@ -48,7 +48,7 @@ void Decoder::correctErrors(ArrayRef<char> codewordBytes, int numDataCodewords) 
     rsDecoder_.decode(codewordInts, numECCodewords);
   } catch (ReedSolomonException const& ignored) {
     (void)ignored;
-    throw ChecksumException();
+    throw ChecksumException("beii5");
   }
   // Copy back into array of bytes -- only need to worry about the bytes that were data
   // We don't care about errors in the error-correction codewords

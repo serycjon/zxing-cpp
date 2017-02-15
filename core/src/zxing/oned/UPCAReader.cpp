@@ -61,7 +61,7 @@ Ref<Result> UPCAReader::maybeReturnResult(Ref<Result> result) {
                                BarcodeFormat::UPC_A));
     return res;
   } else {
-    throw FormatException();
+    throw FormatException("kdppo");
   }
 }
 

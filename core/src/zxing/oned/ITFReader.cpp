@@ -112,7 +112,7 @@ Ref<Result> ITFReader::decodeRow(int rowNumber, Ref<BitArray> row) {
   }
 
   if (!lengthOK) {
-    throw FormatException();
+    throw FormatException("rwuja");
   }
 
   ArrayRef< Ref<ResultPoint> > resultPoints(2);
@@ -243,7 +243,7 @@ void ITFReader::validateQuietZone(Ref<BitArray> row, int startPattern) {
   }
   if (quietCount != 0) {
     // Unable to find the necessary number of quiet zone pixels.
-    throw NotFoundException();
+    throw NotFoundException("5otlc");
   }
 }
 
@@ -258,7 +258,7 @@ int ITFReader::skipWhiteSpace(Ref<BitArray> row) {
   int width = row->getSize();
   int endStart = row->getNextSet(0);
   if (endStart == width) {
-    throw NotFoundException();
+    throw NotFoundException("7o5l1");
   }
   return endStart;
 }
@@ -306,7 +306,7 @@ ITFReader::Range ITFReader::findGuardPattern(Ref<BitArray> row,
       isWhite = !isWhite;
     }
   }
-  throw NotFoundException();
+  throw NotFoundException("7lr5m");
 }
 
 /**
@@ -333,7 +333,7 @@ int ITFReader::decodeDigit(vector<int>& counters){
   if (bestMatch >= 0) {
     return bestMatch;
   } else {
-    throw NotFoundException();
+    throw NotFoundException("vxny4");
   }
 }
 

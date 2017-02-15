@@ -106,5 +106,5 @@ Ref<Result> MultiFormatUPCEANReader::decodeRow(int rowNumber, Ref<BitArray> row)
     return result;
   }
 
-  throw NotFoundException();
+  throw NotFoundException("xezmo");
 }

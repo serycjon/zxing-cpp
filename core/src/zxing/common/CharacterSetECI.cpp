@@ -95,7 +95,7 @@ void CharacterSetECI::addCharacterSet(int const* values, char const* const* name
 
 CharacterSetECI* CharacterSetECI::getCharacterSetECIByValue(int value) {
   if (value < 0 || value >= 900) {
-    throw FormatException();
+    throw FormatException("l3o69");
   }
   return VALUE_TO_ECI[value];
 }

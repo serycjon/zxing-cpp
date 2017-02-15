@@ -89,7 +89,7 @@ Ref<Result> CodaBarReader::decodeRow(int rowNumber, Ref<BitArray> row) {
   do {
     int charOffset = toNarrowWidePattern(nextStart);
     if (charOffset == -1) {
-      throw NotFoundException();
+      throw NotFoundException("fhqpp");
     }
     // Hack: We store the position in the alphabet table into a
     // StringBuilder, so that we can access the decoded patterns in
@@ -114,7 +114,7 @@ Ref<Result> CodaBarReader::decodeRow(int rowNumber, Ref<BitArray> row) {
   // otherwise this is probably a false positive. The exception is if we are
   // at the end of the row. (I.e. the barcode barely fits.)
   if (nextStart < counterLength && trailingWhitespace < lastPatternSize / 2) {
-    throw NotFoundException();
+    throw NotFoundException("p70jj");
   }
 
   validatePattern(startOffset);
@@ -126,17 +126,17 @@ Ref<Result> CodaBarReader::decodeRow(int rowNumber, Ref<BitArray> row) {
   // Ensure a valid start and end character
   char startchar = decodeRowResult[0];
   if (!arrayContains(STARTEND_ENCODING, startchar)) {
-    throw NotFoundException();
+    throw NotFoundException("5ofmw");
   }
   char endchar = decodeRowResult[decodeRowResult.length() - 1];
   if (!arrayContains(STARTEND_ENCODING, endchar)) {
-    throw NotFoundException();
+    throw NotFoundException("akh1c");
   }
 
   // remove stop/start characters character and check if a long enough string is contained
   if ((int)decodeRowResult.length() <= MIN_CHARACTER_LENGTH) {
     // Almost surely a false positive ( start + stop + at least 1 character)
-    throw NotFoundException();
+    throw NotFoundException("4pwch");
   }
 
   decodeRowResult.erase(decodeRowResult.length() - 1, 1);
@@ -214,7 +214,7 @@ void CodaBarReader::validatePattern(int start)  {
       int category = (j & 1) + (pattern & 1) * 2;
       int size = counters[pos + j];
       if (size < mins[category] || size > maxes[category]) {
-        throw NotFoundException();
+        throw NotFoundException("09pp1");
       }
       pattern >>= 1;
     }
@@ -237,7 +237,7 @@ void CodaBarReader::setCounters(Ref<BitArray> row)  {
   int i = row->getNextUnset(0);
   int end = row->getSize();
   if (i >= end) {
-    throw NotFoundException();
+    throw NotFoundException("2c8g2");
   }
   bool isWhite = true;
   int count = 0;
@@ -277,7 +277,7 @@ int CodaBarReader::findStartPattern() {
       }
     }
   }
-  throw NotFoundException();
+  throw NotFoundException("8ajc7");
 }
 
 bool CodaBarReader::arrayContains(char const array[], char key) {
